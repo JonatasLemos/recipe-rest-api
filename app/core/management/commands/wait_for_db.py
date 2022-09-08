@@ -26,6 +26,9 @@ class Command(BaseCommand):
                 time.sleep(1)
                 count += 1
                 if count == 8:
-                    self.stdout.write('Timeout reached, check the database')
                     break
-        self.stdout.write(self.style.SUCCESS('Database available!'))
+        if db_up:
+            self.stdout.write(self.style.SUCCESS('Database available!'))
+        else:
+            self.stdout.write(self.style.ERROR(
+                'Timeout reached, check the error message below'))
